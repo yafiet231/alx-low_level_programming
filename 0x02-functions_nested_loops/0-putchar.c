@@ -2,22 +2,19 @@
 
 /**
  * main - entry point
- * return: always 0
+ *
+ * Return: return 0 if successful
  */
-
 int main(void)
-
 {
-
 	_putchar('_');
 	_putchar('u');
 	_putchar('p');
-	-putchar('t');
+	_putchar('t');
 	_putchar('c');
 	_putchar('h');
 	_putchar('a');
 	_putchar('r');
-	_putchar('\m');
+	_putchar('\n');
 	return (0);
-
 }
