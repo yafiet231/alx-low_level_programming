@@ -2,26 +2,22 @@
 #include <stdio.h>
 
 /**
-  * print_number - Prints an integer.
-  * @c: The integer to prints.
+  * print_number - Prints an integer
+  * @c: The parameter, integer value/ input
   *
-  * Return: Nothing!
   */
 void print_number(int c)
 {
-	unsigned int m = c;
+	unsigned int x = c;
 
 	if (c < 0)
 	{
-		c *= -1;
-		m = c;
-		_putchar('-');
+		_putchar(45);
+		x = -x;
 	}
-
-	m /= 10;
-
-	if (m != 0)
-		print_number(m);
-
-	_putchar((unsigned int) c % 10 + '0');
+	if (x / 10)
+	{
+		print_number(x / 10);
+	}
+	_putchar(x % 10 + '0');
 }
