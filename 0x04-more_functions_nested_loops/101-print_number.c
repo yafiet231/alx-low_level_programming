@@ -7,8 +7,7 @@
   *
   * Return: Nothing!
   */
-
-void print_numbers(int c)
+void print_number(int c)
 {
 	unsigned int m = c;
 

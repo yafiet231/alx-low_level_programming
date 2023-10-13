@@ -2,7 +2,7 @@
 
 /**
  * main - check the code
- *
+ * print_numbers(n)
  * Return: Always 0.
  */
 int main(void)
