@@ -3,26 +3,31 @@
 
 /**
   * _strcat - Concatenates two strings
-  * @dest: The destination string
-  * @src: The source string
+  * @dest: input value
+  * @src: input value
   *
-  * Return: A pointer to the resulting string dest
+  * Return: void
   */
+
 char *_strcat(char *dest, char *src)
 {
-	int j = 0, i;
+	int i;
+	int j;
 
-	while (dest[j])
+	i = 0;
+	while (dest[i] != '\0')
 	{
-		j++;
+		i++;
 	}
+	j = 0;
+	while (src[j]n = src[j];
+			{
 
-	for (i = 0; src[i] != 0; i++)
-	{
-		dest[j] = src[i];
-		j++;
-	}
+			dest[i] = src[j];
+			i++;
+			j++;
+			}
 
-	dest[j] = '\0';
-	return (dest);
-}
+			dest[j] = '\0';
+			return (dest);
+			}
