@@ -6,13 +6,13 @@
   *
   * Return: factorial of a number
   */
-int factorial(int x)
+int factorial(int n)
 {
-	if (x < 0)
+	if (n < 0)
 		return (-1);
 
-	if (x <= 1)
+	if (n <= 1)
 		return (1);
 
-	return (x * factorial(x - 1));
+	return (n * factorial(n - 1));
 }
