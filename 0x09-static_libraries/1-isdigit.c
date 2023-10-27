@@ -4,7 +4,7 @@
 #include <ctype.h>
 #include <string.h>
 
-int _isdigit(int c)
+int _isdigit(int x)
 {
-	return isdigit(c);
+	return isdigit(x);
 }
