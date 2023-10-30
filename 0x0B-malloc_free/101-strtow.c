@@ -1,54 +1,89 @@
 #include "main.h"
 #include <stdlib.h>
 
-/**
- * argstostr - convert the params passed to the program to string
- * @ac: the argument count
- * @av: the argument vector
- *
- * Return: A pointer to string that containing all arguments
- * or NULL if ac == 0, if av == NULL, or upon failure
- */
-char *argstostr(int ac, char **av)
-{
-	int ch = 0, a = 0, b = 0, c = 0;
-	char *s;
+int word_len(char *str);
+int count_words(char *str);
+char **strtow(char *str);
 
-	if (ac == 0 || av == NULL)
+/**
+ * word_len - locates the index marking the end of the first word contained within a string.
+ * @str: the string to be searched.
+ *
+ * retrun: the index marking the end of the initial word pointto by str.
+ */
+int word_len(char *str)
+{
+	int index = 0, len = 0;
+
+	while (*(str + index) && *(str + index) != ' ')
+	{
+		len++;
+		index++;
+	}
+	return (len);
+}
+
+/**
+ * count_words - counts the number of words contained within a string.
+ * @str: the string to be searched.
+ *
+ * return: the number of words contained within str.
+ */
+int count_words(char *str)
+{
+	int index = 0, words = 0, len = 0;
+
+	for (index = 0; *(str + index); index++)
+		len++;
+	for (index = 0; index < len; index++)
+	{
+		if (*(str + index) != ' ')
+		{
+			words++;
+			index += word_len(str + index);
+		}
+	}
+	return (words);
+}
+
+/**
+ * strtow - splits a string into words.
+ * @str: the string to be split.
+ *
+ * return: if str = NULL, str = "", or the function fails -NULL.
+ * otherwise - a pointer to an array of strings (words).
+ */
+char **strtow(char *str)
+{
+	char **strings;
+	int index = 0, words, w, letters, l;
+
+	if (str == NULL || str[0] == '\0')
+		return (NULL);
+	words = count_words(str);
+	if (words == 0)
 		return (NULL);
 
-	while (a < ac)
+	for (w = 0; w < words; w++)
 	{
-		while (av[a][b])
+		while (str[index] == ' ')
+			index++;
+
+		letters = word_len(str + index);
+		strings[w] = malloc(sizeof(char) * (letters + 1));
+		if (strings[w] == NULL)
 		{
-			ch++;
-			b++;
+			for (; w >= 0; w--)
+				free(strings[w]);
+
+			free(strings);
+			return (NULL);
 		}
+		for (l = 0; l < letters; l++)
+			strings[w][l] = str[index++];
 
-		b = 0;
-		a++;
+		strings[w][l] = '\0';
 	}
-
-	s = malloc((sizeof(char) * ch) + ac + 1);
-
-	a = 0;
-	while (av[a])
-	{
-		while (av[a][b])
-		{
-			s[c] = av[a][b];
-			c++;
-			b++;
-		}
-
-		s[c] = '\n';
-
-		b = 0;
-		c++;
-		a++;
-	}
-
-	c++;
-	s[c] = '\0';
-	return (s);
+	strings[w] = NULL;
+	return (strings);
 }
