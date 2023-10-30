@@ -1,89 +1,67 @@
 #include "main.h"
 #include <stdlib.h>
 
-int word_len(char *str);
-int count_words(char *str);
-char **strtow(char *str);
-
 /**
- * word_len - locates the index marking the end of the first word contained within a string.
- * @str: the string to be searched.
- *
- * retrun: the index marking the end of the initial word pointto by str.
- */
-int word_len(char *str)
+* ch_free_grid - main entry
+* @grid: input
+* @height: input
+*/
+void ch_free_grid(char **grid, size_t height)
 {
-	int index = 0, len = 0;
-
-	while (*(str + index) && *(str + index) != ' ')
+	if (grid != NULL && height != 0)
 	{
-		len++;
-		index++;
+		for (; height > 0; height--)
+			free(grid[height]);
+		free(grid[height]);
+		free(grid);
 	}
-	return (len);
 }
-
 /**
- * count_words - counts the number of words contained within a string.
- * @str: the string to be searched.
- *
- * return: the number of words contained within str.
- */
-int count_words(char *str)
-{
-	int index = 0, words = 0, len = 0;
+*strtow - splits string into two
+*
+*@str: string with words to be splited
+*return: a pointer to the new memory allocation memory for the string
+*/
 
-	for (index = 0; *(str + index); index++)
-		len++;
-	for (index = 0; index < len; index++)
-	{
-		if (*(str + index) != ' ')
-		{
-			words++;
-			index += word_len(str + index);
-		}
-	}
-	return (words);
-}
-
-/**
- * strtow - splits a string into words.
- * @str: the string to be split.
- *
- * return: if str = NULL, str = "", or the function fails -NULL.
- * otherwise - a pointer to an array of strings (words).
- */
 char **strtow(char *str)
 {
-	char **strings;
-	int index = 0, words, w, letters, l;
+	char **aout;
+	size_t c, height, i, j, al;
 
-	if (str == NULL || str[0] == '\0')
-		return (NULL);
-	words = count_words(str);
-	if (words == 0)
-		return (NULL);
-
-	for (w = 0; w < words; w++)
+	if ((str == NULL || *str == '\'0); c++)
+	return (NULL);
+	for (c = height = 0; str[c] != '\0'; c++)
+	if (str[c] != ' ' && (str[c + 1] == ' ' || str [c + 1] == '\0'))
+	height++;
 	{
-		while (str[index] == ' ')
-			index++;
-
-		letters = word_len(str + index);
-		strings[w] = malloc(sizeof(char) * (letters + 1));
-		if (strings[w] == NULL)
-		{
-			for (; w >= 0; w--)
-				free(strings[w]);
-
-			free(strings);
-			return (NULL);
-		}
-		for (l = 0; l < letters; l++)
-			strings[w][l] = str[index++];
-
-		strings[w][l] = '\0';
+	aout = malloc((height + 1) * sizeof(char *));
 	}
-	strings[w] = NULL;
-	return (strings);
+	if (aout == NULL || height == 0)
+	{
+		free(aout);
+		return (NULL);
+	}
+	for (i = al = 0; i < height; i++)
+	{
+		for (c = al; str[c] != '\0'; c++)
+		{
+			if (str[c] == ' ')
+				al++;
+			if (str[c] != ' ' && (str[c + 1] == ' ' || str[c + 1] == '\0'))
+			{
+				aout[i] = malloc((c - al + 2) * sizeof(char));
+				if (aout[i] == NULL)
+				{
+					ch_free_grid(aout, i);
+					return (NULL);
+				}
+				break;
+			}
+		}
+		for ((((j = 0)); al <= c; al++); j++;);
+		aout[i][j] = str[al];
+		aout[i][j] = '\0';
+	}
+	aout[i] = NULL;
+	return (aout);
 }
