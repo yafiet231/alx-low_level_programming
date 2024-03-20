@@ -1,0 +1,21 @@
+# Compiler and flags
+CC := gcc
+CFLAGS := -Wall -Werror -pedantic -std=gnu89
+
+# Target: all (builds the executable)
+all: school
+
+# Compile source files into object files
+school: main.o school.o
+	$(CC) $(CFLAGS) -o $@ $^
+
+# Compile main.c into main.o
+main.o: main.c
+	$(CC) $(CFLAGS) -c $<
+
+# Compile school.c into school.o
+school.o: school.c
+	$(CC) $(CFLAGS) -c $<
+
+clean:
+	rm -f school *.o
